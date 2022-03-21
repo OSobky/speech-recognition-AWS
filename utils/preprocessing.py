@@ -123,7 +123,7 @@ if __name__ == "__main__":
     train_features_output_path = "/opt/ml/processing/train"
     val_features_output_path = "/opt/ml/processing/val"
     test_features_output_path = "/opt/ml/processing/test"
-    labels_output_path = "/opt/ml/processing/labels.npy"
+    labels_output_path = "/opt/ml/processing/commands/commands"
 
     
     print("Saving train spectrogram to {}".format(train_features_output_path))
@@ -139,6 +139,8 @@ if __name__ == "__main__":
     np.save(labels_output_path, commands)
     
     
+    d = np.load(labels_output_path + ".npy")
+    print(commands == d)
 
     
     
