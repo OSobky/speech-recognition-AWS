@@ -31,7 +31,8 @@ if __name__ =='__main__':
 
     args, _ = parser.parse_known_args()
     
-    train_ds = tf.data.experimental.load(args.train)
+    spectrogram_ds = tf.data.experimental.load(args.train)
+    train_ds = spectrogram_ds
     val_ds = tf.data.experimental.load(args.val)
     test_ds = tf.data.experimental.load(args.test)
     commands = np.load(args.labels + "/commands.npy")
@@ -56,16 +57,21 @@ if __name__ =='__main__':
     # - For the Normalization layer, its adapt method would first need to be called on the training data in order to compute aggregate statistics (that is, the mean and the standard deviation).
     
     
-    for spectrogram, _ in train_ds.take(1):
+    for spectrogram, _ in spectrogram_ds.take(1):
       input_shape = spectrogram.shape
     print('Input shape:', input_shape)
     num_labels = len(commands)
+    print(num_labels)
+    
+    for spectrogram, _ in val_ds.take(1):
+      tmp = spectrogram.shape
+    print('val shape:', tmp)
 
     # Instantiate the `tf.keras.layers.Normalization` layer.
     norm_layer = layers.Normalization()
     # Fit the state of the layer to the spectrograms
     # with `Normalization.adapt`.
-    norm_layer.adapt(data=train_ds.map(map_func=lambda spec, label: spec))
+    norm_layer.adapt(data=spectrogram_ds.map(map_func=lambda spec, label: spec))
 
     model = models.Sequential([
         layers.Input(shape=input_shape),
@@ -92,13 +98,21 @@ if __name__ =='__main__':
         metrics=['accuracy'],
     )
     
+    LOG_DIR = "/opt/ml/output/tensorboard"
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram_freq=1)
+    
+    
     EPOCHS = args.epochs
     history = model.fit(
         train_ds,
         validation_data=val_ds,
         epochs=EPOCHS,
-        callbacks=tf.keras.callbacks.EarlyStopping(verbose=1, patience=2),
+        callbacks=[tf.keras.callbacks.EarlyStopping(verbose=1, patience=2), tensorboard_callback],
     )
 
+    
+    # Save model to the SM_MODEL_DIR path
+    print("Saving model to {}".format(os.environ.get('SM_MODEL_DIR')))
+    model.save(os.environ.get('SM_MODEL_DIR'))
     
 
