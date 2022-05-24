@@ -60,7 +60,7 @@ def get_spectrogram(waveform):
   equal_length = tf.concat([waveform, zero_padding], 0)
   # Convert the waveform to a spectrogram via a STFT.
   spectrogram = tf.signal.stft(
-      equal_length, frame_length=255, frame_step=128)
+      equal_length, frame_length=255, frame_step=325, fft_length =78 )
   # Obtain the magnitude of the STFT.
   spectrogram = tf.abs(spectrogram)
   # Add a `channels` dimension, so that the spectrogram can be used
