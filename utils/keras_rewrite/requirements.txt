@@ -1,0 +1,12 @@
+tensorflow
+tensorboard
+numpy
+mlflow
+boto3
+tqdm
+python-dotenv
+# As of March 2022 the most recent version of DVC is 2.9.5. However deploying this repo on
+# the ICP, an older pip version (19.3.1) is used. This version can only download the DVC package
+# up to version 2.8.1, which is why the pinned version here is not the most recent one but the 
+# one downloaded by the older pip version used on ICP.
+#dvc[s3]==2.8.1
