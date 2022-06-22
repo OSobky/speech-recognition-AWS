@@ -44,7 +44,7 @@ Machine Learning has found numerous real-world applications, but bringing the po
 Machine Learning to resource constrained and small footprint is still challenging. There are
 many limiting factors to the deployment of ML models on microcontrollers such as libraries
 used by the model, programming the microcontroller, data types, and etc. This IDP will be
-completed in cooperation with Infineon Technologies, we will use Infineon PSoC6 board, shown
+completed in cooperation with XXXXXXX, we will use Infineon PSoC6 board, shown
 in Figure below, to recognise Keywords "yes" & "no" using a Machine Learning Model created on
 AWS. The application listens to its surroundings with a microphone and indicates when it has
 detected a word by lighting an LED or displaying data on a screen, depending on the
@@ -80,25 +80,33 @@ microcontroller libraries. We will build an end-to-end ML solution which will sh
 whole ML pipeline from collecting and preprocessing data to building a model using AWS
 Infrastructure and then deploying the created model to a microcontroller.
 
+
+
 <br>
 
 # Methodology 
 
-#### The different phases for the end-to-end example are described below: ####
+In this section we will discuss the milestones/phases needed for this project.
 
+#### The different phases for the end-to-end example are described below: ####
 
 1. Data Acquisition & storage in AWS
     1. We will be using Speech Command dataset provided by Google
     2. The dataset will be stored in Amazon S3 Bucket.
 2. Data pre-processing using AWS SageMaker Processing Jobs
 3. ML Training using AWS SageMaker Training Jobs
-4. ML Deployment Web using AWS SageMaker Inference
-5. ML Deployment PSoC6 board
+4. ML Deployment Web using AWS SageMaker End-Points
+5. ML Deployment PSoC6 board (Figure below)
     1. Data in: Getting data from the PSoC6 microphone and sending it to pre-processing
     2. Pre-processing: Feature engineering
     3. ML Inference: Using the deployed model on the board
     4. Post-processing: Converting inference output to UART/LED
+    
+<br>
 
+<div align="center">
+<img src="docs/images/Micro-speech example.png" title="Login Page" width="50%"> 
+</div>
 
 ## Getting Started
 
