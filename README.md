@@ -17,9 +17,11 @@
 <details open="open">
 <summary>Table of Contents</summary>
 
-- [About](#about)
-- [Introduction](#about)
-- [Methodology](#about)
+
+- [Introduction](#introduction)
+  - [Motivation](#motivation)   
+  - [Objective](#objective)   
+- [Methodology](#methodology)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
@@ -32,17 +34,25 @@
 
 ---
 
-## About
+# Introduction
+
+## Motivation
 
 <table><tr><td>
 
-> **[?]**
-> Provide general information about your project here.
-> What problem does it (intend to) solve?
-> What is the purpose of your project?
-> Why did you undertake it?
-> You don't have to answer all the questions -- just the ones relevant to your project.
+Machine Learning has found numerous real-world applications, but bringing the power of
+Machine Learning to resource constrained and small footprint is still challenging. There are
+many limiting factors to the deployment of ML models on microcontrollers such as libraries
+used by the model, programming the microcontroller, data types, and etc. This IDP will be
+completed in cooperation with Infineon Technologies, we will use Infineon PSoC6 board, shown
+in Figure below, to recognise Keywords "yes" & "no" using a Machine Learning Model created on
+AWS. The application listens to its surroundings with a microphone and indicates when it has
+detected a word by lighting an LED or displaying data on a screen, depending on the
+capabilities of the device.
 
+<div align="center">
+<img src="docs/images/psoc6.webp" title="Login Page" width="30%"> 
+</div>
 <details>
 <summary>Screenshots</summary>
 <br>
@@ -58,10 +68,37 @@
 
 </td></tr></table>
 
-### Built With
 
-> **[?]**
-> Please provide the technologies that are used in the project.
+
+## Objective 
+<br>
+
+Our objective is to showcase the AWS Infrastructure for generating a model, and to demonstrate
+the capabilities of the Infineon PSoC6 microcontroller. In this project, we will try to overcome
+some of the challenges faced in the deployment of ML models to microcontrollers by using
+microcontroller libraries. We will build an end-to-end ML solution which will showcase the
+whole ML pipeline from collecting and preprocessing data to building a model using AWS
+Infrastructure and then deploying the created model to a microcontroller.
+
+<br>
+
+# Methodology 
+
+#### The different phases for the end-to-end example are described below: ####
+
+
+1. Data Acquisition & storage in AWS
+    1. We will be using Speech Command dataset provided by Google
+    2. The dataset will be stored in Amazon S3 Bucket.
+2. Data pre-processing using AWS SageMaker Processing Jobs
+3. ML Training using AWS SageMaker Training Jobs
+4. ML Deployment Web using AWS SageMaker Inference
+5. ML Deployment PSoC6 board
+    1. Data in: Getting data from the PSoC6 microphone and sending it to pre-processing
+    2. Pre-processing: Feature engineering
+    3. ML Inference: Using the deployed model on the board
+    4. Post-processing: Converting inference output to UART/LED
+
 
 ## Getting Started
 
