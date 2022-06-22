@@ -1,7 +1,8 @@
 <h1 align="center">
-  <a href="https://github.com/OSobky/speech-recognition-AWS-readme">
+  <a href="https://github.com/OSobky/speech-recognition-AWS">
     <!-- Please provide path to your logo here -->
-    <img src="docs/images/logo.svg" alt="Logo" width="100" height="100">
+    <img src="docs/images/sm_background.png" alt="Logo" width="80" height="80">
+    <img src="docs/images/psoc6.png" alt="Logo" width="100" height="100">
   </a>
 </h1>
 
