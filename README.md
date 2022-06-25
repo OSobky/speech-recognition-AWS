@@ -22,9 +22,9 @@
   - [Motivation](#motivation)   
   - [Objective](#objective)   
 - [Methodology](#methodology)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
+   - [Prerequisites](#prerequisites)
+   - [Data Acquisition & storage in AWS](#data-acquisition--storage-in-aws)
+   - [Model Training in AWS](#model-training-in-aws)
 - [Results](#about)
 - [Conclusion](#about)
 - [Authors & contributors](#authors--contributors)
@@ -51,7 +51,7 @@ detected a word by lighting an LED or displaying data on a screen, depending on 
 capabilities of the device.
 
 <div align="center">
-<img src="docs/images/psoc6.webp" title="Login Page" width="30%"> 
+<img src="docs/images/psoc6.webp" title="Login Page" width="50%"> 
 </div>
 <details>
 <summary>Screenshots</summary>
@@ -62,7 +62,7 @@ capabilities of the device.
 
 |                               Home Page                               |                               Login Page                               |
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| <img src="docs/images/screenshot.png" title="Home Page" width="100%"> | <img src="docs/images/screenshot.png" title="Login Page" width="100%"> |
+| <img src="docs/images/screenshot.png" title="Home Page" width="50%"> | <img src="docs/images/screenshot.png" title="Login Page" width="50%"> |
 
 </details>
 
@@ -78,7 +78,7 @@ the capabilities of the Infineon PSoC6 microcontroller. In this project, we will
 some of the challenges faced in the deployment of ML models to microcontrollers by using
 microcontroller libraries. We will build an end-to-end ML solution which will showcase the
 whole ML pipeline from collecting and preprocessing data to building a model using AWS
-Infrastructure and then deploying the created model to a microcontroller.
+SageMaker and then deploying the created model to a microcontroller.
 
 
 
@@ -105,20 +105,97 @@ In this section we will discuss the milestones/phases needed for this project.
 <br>
 
 <div align="center">
-<img src="docs/images/Micro-speech example.png" title="Login Page" width="50%"> 
+<img src="docs/images/Micro-speech example.png" title="Login Page" width="70%"> 
 </div>
 
-## Getting Started
+<br>
 
-### Prerequisites
+Before disucssing the details of each milestone, let's discuss the prerequisites for this project.
 
-> **[?]**
-> What are the project requirements/dependencies?
+## Prerequisites
 
-### Installation
+The following list is essintial for this project:
+- AWS Account
+- PSoC6 6 board
+- Modus Tool Box (MTB)
 
-> **[?]**
-> Describe how to install and get started with the project.
+
+In the following sections, we will disscuss how each milestone done and the challanges faced in each one.
+
+
+##  Data Acquisition & storage in AWS
+
+
+First we will speak about the datasets used and then how to move the data to AWS. 
+
+### Speech Commands Dataset
+
+For this project, we uses the Speech Commands dataset, a dataset created by Google which contains around 65,000 one-second long audios of 30 short words (Yes, No, and etc.) said by thousands different people. However, for development we uses Mini-Speech Commands Dataset (~1k) to develop the whole pipeline then re-run it with the original dataset.
+
+### Amazon Simple Storage Service (Amazon S3)
+
+One of our main focus is showcasing AWS services specifically AWS SageMaker. There is a multiple way to stream data to SageMaker, in this project we will be using Amazon Simple Storage Service (Amazon S3) as our storage on AWS as it is the best for our use-case. 
+
+<br>
+the following are multiple ways to upload data to S3 bucket.
+
+- #### Downloaded dataset locally then upload the required data using the UI ####
+- Use the command line locally 
+- Use the EC2 if the internet is slow
+- Write a lambda function to download, extract required files, then upload them
+
+
+In this project, we uses the first way in the previous list to upload data to S3 bucket. Now we have our data in S3 bucket, then it's time to use AWS SageMaker for preprocessing, training, and deployment. 
+
+<br>
+
+## Data preprocessing using AWS SageMaker Processing Jobs
+
+In this section, we dissucs the preprocessing techniques and how to use Processing Jobs for preprocessing in SageMaker. 
+
+### Spectrograms
+
+
+<div align="center">
+<img src="docs/images/spectrogram.png" title="Login Page" width="70%"> 
+</div>
+
+
+The model doesn't take in raw audio sample data, instead it works with spectrograms which are two dimensional arrays that are made up of slices of frequency information, each taken from a different time window.
+
+The recipe for creating the spectrogram data is that each frequency slice is created by running an FFT across a 30ms section of the audio sample data. The input samples are treated as being between -1 and +1 as real values (encoded as -32,768 and 32,767 in 16-bit signed integer samples).
+
+This results in an FFT with 256 entries. Every sequence of six entries is averaged together, giving a total of 43 frequency buckets in the final slice. The results are stored as unsigned eight-bit values, where 0 represents a real number of zero, and 255 represents 127.5 as a real number.
+
+Each adjacent frequency entry is stored in ascending memory order (frequency bucket 0 at data[0], bucket 1 at data[1], etc). The window for the frequency analysis is then moved forward by 20ms, and the process repeated, storing the results in the next memory row (for example bucket 0 in this moved window would be in data[43 + 0], etc). This process happens 49 times in total, producing a single channel image that is 43 pixels wide, and 49 rows high.
+
+<br>
+
+
+### Processing Jobs
+
+
+
+<br>
+
+
+## Model Training in AWS
+
+In this section, we will dissucs the model architcture and how to use Training Jobs for preprocessing in AWS SageMaker.
+<br>
+
+### Model architcture
+
+<br>
+
+### Training Jobs
+<br>
+
+## ML Deployment Web using AWS SageMaker End-Points
+<br>
+
+## ML Deployment PSoC6 board 
+
 
 ## Usage
 
