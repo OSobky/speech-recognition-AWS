@@ -198,7 +198,7 @@ Each adjacent frequency entry is stored in ascending memory order (frequency buc
 ### Processing Jobs
 
 <div align="center">
-<img src="docs/images/processing-jobs.png" title="Login Page" width="50%"> 
+<img src="docs/images/processing-jobs.png" title="Login Page" width="70%"> 
 </div>
 
 
@@ -217,7 +217,7 @@ This is a simple model comprising of a Convolutional 2D layer, a Fully Connected
 
 
 <div align="center">
-<img src="docs/images/model_2.tflite.png" title="Login Page" width="50%"> 
+<img src="docs/images/model_2.tflite.png" title="Login Page" width="30%"> 
 </div>
 
 This image was derived from visualizing the 'model_2.tflite' file in Netron
@@ -229,7 +229,7 @@ This doesn't produce a highly accurate model, but it's designed to be used as th
 ### Training Jobs
 
 <div align="center">
-<img src="docs/images/training-jobs.png" title="Login Page" width="50%"> 
+<img src="docs/images/training-jobs.png" title="Login Page" width="70%"> 
 </div>
 
 
