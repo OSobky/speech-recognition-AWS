@@ -78,8 +78,12 @@ the capabilities of the Infineon PSoC6 microcontroller. In this project, we will
 some of the challenges faced in the deployment of ML models to microcontrollers by using
 microcontroller libraries. We will build an end-to-end ML solution which will showcase the
 whole ML pipeline from collecting and preprocessing data to building a model using AWS
-SageMaker and then deploying the created model to a microcontroller.
+SageMaker and then deploying the created model to a microcontroller. The following Diagram shows the project workflow.
 
+
+<div align="center">
+<img src="docs/images/IDP Diagram.png" title="Login Page" width="70%"> 
+</div>
 
 
 <br>
@@ -151,7 +155,26 @@ In this project, we uses the first way in the previous list to upload data to S3
 
 ## Data preprocessing using AWS SageMaker Processing Jobs
 
-In this section, we dissucs the preprocessing techniques and how to use Processing Jobs for preprocessing in SageMaker. 
+In this section, we dissucs the preprocessing techniques and how to use Processing Jobs for preprocessing in SageMaker. However, Beforehand we will dissucss what is SageMaker.
+
+### SageMaker
+
+- Fully managed ML service, consisting of multiple services. Used for:
+    - Label
+    - Build/Develop
+    - Train
+    - Deploy 
+
+- Studio = Managed EC2 Instance (Virtual Machine) + Managed EBS Volume (Storage)
+
+- we will be using also Processing Jobs, Training Jobs, Endpoints provided by SageMaker
+
+we will use SageMaker Studio for the development. The following diagram illustrates the workflow within SageMaker
+
+<div align="center">
+<img src="docs/images/SageMaker-diagram.png" title="Login Page" width="70%"> 
+</div>
+
 
 ### Spectrograms
 
@@ -174,6 +197,9 @@ Each adjacent frequency entry is stored in ascending memory order (frequency buc
 
 ### Processing Jobs
 
+<div align="center">
+<img src="docs/images/processing-jobs.png" title="Login Page" width="50%"> 
+</div>
 
 
 <br>
@@ -186,9 +212,27 @@ In this section, we will dissucs the model architcture and how to use Training J
 
 ### Model architcture
 
+This is a simple model comprising of a Convolutional 2D layer, a Fully Connected Layer or a MatMul Layer (output: logits) and a Softmax layer (output: probabilities) as shown below. Refer to the tiny_conv model architecture.
+
+
+
+<div align="center">
+<img src="docs/images/model_2.tflite.png" title="Login Page" width="50%"> 
+</div>
+
+This image was derived from visualizing the 'model_2.tflite' file in Netron
+
+This doesn't produce a highly accurate model, but it's designed to be used as the first stage of a pipeline, running on a low-energy piece of hardware that can always be on, and then wake higher-power chips when a possible utterance has been found, so that more accurate analysis can be done. Additionally, the model takes in preprocessed speech input as a result of which we can leverage a simpler model for accurate results.
+
 <br>
 
 ### Training Jobs
+
+<div align="center">
+<img src="docs/images/training-jobs.png" title="Login Page" width="50%"> 
+</div>
+
+
 <br>
 
 ## ML Deployment Web using AWS SageMaker End-Points
