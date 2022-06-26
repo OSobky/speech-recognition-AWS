@@ -192,25 +192,41 @@ This results in an FFT with 256 entries. Every sequence of six entries is averag
 
 Each adjacent frequency entry is stored in ascending memory order (frequency bucket 0 at data[0], bucket 1 at data[1], etc). The window for the frequency analysis is then moved forward by 20ms, and the process repeated, storing the results in the next memory row (for example bucket 0 in this moved window would be in data[43 + 0], etc). This process happens 49 times in total, producing a single channel image that is 43 pixels wide, and 49 rows high.
 
+You can see the whole preporcessing procedure in [data-exploration.ipynb](data-exploration.ipynb)
+
 <br>
 
 
 ### Processing Jobs
+
+
+To analyze data and evaluate machine learning models on Amazon SageMaker, use Amazon SageMaker Processing. With Processing, you can use a simplified, managed experience on SageMaker to run your data processing workloads, such as feature engineering, data validation, model evaluation, and model interpretation. You can also use the Amazon SageMaker Processing APIs during the experimentation phase and after the code is deployed in production to evaluate performance.
+
 
 <div align="center">
 <img src="docs/images/processing-jobs.png" title="Login Page" width="70%"> 
 </div>
 
 
+The preceding diagram shows how Amazon SageMaker spins up a Processing job. Amazon SageMaker takes your script, copies your data from Amazon Simple Storage Service (Amazon S3), and then pulls a processing container. The processing container image can either be an Amazon SageMaker built-in image or a custom image that you provide. The underlying infrastructure for a Processing job is fully managed by Amazon SageMaker. Cluster resources are provisioned for the duration of your job, and cleaned up when a job completes. The output of the Processing job is stored in the Amazon S3 bucket you specified.
+
+
+We use processing jobs for preprocessing in this project. You can see how to create and run a processing job in [preprocessing-job.ipynb](preprocessing-job.ipynb) file
+
+
+
+
 <br>
 
 
 ## Model Training in AWS
+<br>
 
 In this section, we will dissucs the model architcture and how to use Training Jobs for preprocessing in AWS SageMaker.
 <br>
 
 ### Model architcture
+<br>
 
 This is a simple model comprising of a Convolutional 2D layer, a Fully Connected Layer or a MatMul Layer (output: logits) and a Softmax layer (output: probabilities) as shown below. Refer to the tiny_conv model architecture.
 
@@ -227,6 +243,8 @@ This doesn't produce a highly accurate model, but it's designed to be used as th
 <br>
 
 ### Training Jobs
+
+<br>
 
 <div align="center">
 <img src="docs/images/training-jobs.png" title="Login Page" width="70%"> 
