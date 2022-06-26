@@ -236,6 +236,14 @@ This doesn't produce a highly accurate model, but it's designed to be used as th
 <br>
 
 ## ML Deployment Web using AWS SageMaker End-Points
+- Deploy the model using Amazon SageMaker 
+    - SageMaker real-time hosting services
+    - Serverless Inference. 
+    - SageMaker Asynchronous Inference.
+    - SageMaker batch transform
+- Used real-time hosting for inference “model.deploy()”
+
+
 <br>
 
 ## ML Deployment PSoC6 board 
