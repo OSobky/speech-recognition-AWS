@@ -23,12 +23,10 @@
   - [Objective](#objective)   
 - [Methodology](#methodology)
    - [Prerequisites](#prerequisites)
-   - [Data Acquisition & storage in AWS](#data-acquisition--storage-in-aws)
-   - [Model Training in AWS](#model-training-in-aws)
-- [Results](#about)
+- [Results](#results)
 - [Conclusion](#about)
 - [Authors & contributors](#authors--contributors)
-- [Acknowledgements](#acknowledgements)
+
 
 </details>
 
