@@ -94,7 +94,7 @@ In this section we will discuss the milestones/phases needed for this project.
 
 #### The different phases for the end-to-end example are described below: ####
 
-1. Data Acquisition & storage in AWS
+1. [Data Acquisition & storage in AWS](#1-data-acquisition--storage-in-aws)
     1. We will be using Speech Command dataset provided by Google
     2. The dataset will be stored in Amazon S3 Bucket.
 2. Data pre-processing using AWS SageMaker Processing Jobs
@@ -127,7 +127,7 @@ The following list is essintial for this project:
 In the following sections, we will disscuss how each milestone done and the challanges faced in each one.
 
 
-##  Data Acquisition & storage in AWS
+## 1. Data Acquisition & storage in AWS
 
 
 First we will speak about the datasets used and then how to move the data to AWS. 
@@ -167,7 +167,7 @@ In this section, we dissucs the preprocessing techniques and how to use Processi
 
 - Studio = Managed EC2 Instance (Virtual Machine) + Managed EBS Volume (Storage)
 
-- we will be using also Processing Jobs, Training Jobs, Endpoints provided by SageMaker
+- We will be using also Processing Jobs, Training Jobs, Endpoints provided by SageMaker
 
 we will use SageMaker Studio for the development. The following diagram illustrates the workflow within SageMaker
 
@@ -244,22 +244,92 @@ This doesn't produce a highly accurate model, but it's designed to be used as th
 
 ### Training Jobs
 
+
+To train a model in SageMaker, you create a training job. The training job includes the following information:
+
+- The URL of the Amazon Simple Storage Service (Amazon S3) bucket where you've stored the training data.
+- The compute resources that you want SageMaker to use for model training. Compute resources are ML compute instances that are managed by SageMaker.
+- The URL of the S3 bucket where you want to store the output of the job.
+- The Amazon Elastic Container Registry path where the training code is stored.
+
+The figure below shows the whole workflow for training and deployment using AWS SageMaker.
+
+
 <br>
 
 <div align="center">
 <img src="docs/images/training-jobs.png" title="Login Page" width="70%"> 
 </div>
 
+<br>
+
+There are multiple options for training algorithms:
+- Built-in Algorithm
+    - SageMaker provides dozens of built-in training algorithms and hundreds of pre-trained models. If one of these meets your needs, it's a great out-of-the-box solution for quick model training. 
+- ##### Script Mode #####
+    - You can submit custom Python code that uses TensorFlow, PyTorch, or Apache MXNet for model training.
+- Docker container
+    - Put your code together as a Docker image and specify the registry path of the image in a SageMaker
+- AWS Marketplace
+    - You can use algorithms published on AWS Marketplace by different entities
+- Notebook instance 
+    - Train in the notebook instance itself
+
+
+<br>
+
+We use the script mode with TensorFlow in this project. You can see how to create and run a training job in [training-job.ipynb](training-job.ipynb) file
+ 
+
+### Model Evaluation and Testing
+
+For training and testing tracking we used Tensorboard with SageMaker Studio. Please refer to the figures below for the training and test metrics. As the main goal of this project is not the model accuracy, we will not dive deep into the model evaluations
+
+#### Training and Testing accuracy 
+
+<!-- <div>
+<figure align="left">
+<img src="docs/images/training-accuracy.png" title="Training Accuracy" width="50%">
+<img src="docs/images/training-accuracy.png" title="Training Accuracy" width="50%">
+<figcaption align = "center"><b>Training Accuracy</b></figcaption>
+</figure>
+
+<figure align="right">
+<img src="docs/images/training-accuracy.png" title="Training Accuracy" width="50%">
+<figcaption align = "center"><b>Training Accuracy</b></figcaption>
+</figure>
+
+</div>
+<br> -->
+
+Training accuracy       |  Testing accuracy  
+:-------------------------:|:-------------------------:
+![](docs/images/training-accuracy.png)  |  ![](docs/images/Test-accuracy.png)
+
+<br>
+
+<figure align="center">
+<img src="docs/images/cm.png" title="Confusion Matrix" width="70%">
+<figcaption align = "center"><b>Confusion Matrix </b></figcaption>
+</figure>
+
 
 <br>
 
 ## ML Deployment Web using AWS SageMaker End-Points
+
+After training the model, we used SageMaker to deploy the model. which created an endpoint where you can use to refer from it.
+
+
+In this section we will discuss AWS SageMaker endpoints and the which one did we use. the following are the list of whole deployment methods provided by SageMaker:
+
 - Deploy the model using Amazon SageMaker 
-    - SageMaker real-time hosting services
-    - Serverless Inference. 
-    - SageMaker Asynchronous Inference.
+    - #### SageMaker real-time hosting services ####
+    - Serverless Inference
+    - SageMaker Asynchronous Inference
     - SageMaker batch transform
-- Used real-time hosting for inference “model.deploy()”
+
+We used the real-time hosting for inference. SageMaker SDK make it very easy to deploy the model. To deploy the model you only need to run the following command  `model.deploy()`
 
 
 <br>
