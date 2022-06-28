@@ -373,7 +373,7 @@ TODO ADD VIDEO
 
 I would like to thank XXXX & XXXX as my supervisers and support me through the project
 
-Also I would like to thank @atakeskinn for letting me reuse his work.
+Also I would like to thank [@atakeskinn](https://github.com/atakeskinn) for letting me reuse his work.
 
 
 ## Authors & contributors
