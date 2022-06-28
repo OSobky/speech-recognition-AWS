@@ -341,7 +341,7 @@ The second step to deploy the model is to convert the TF lite model to a C Model
 
 ### Use pre-processing and post-processing C blocks
 
-You will find in the [C](C) folder the C blocks required for the deployment. which uses the C model and do a inference then ligth the led depends on the inference result. To include the C model in the embedding code, we need to change the TODO file 
+You will find in the [C](C) folder the C blocks required for the deployment. which uses the C model and do a inference then ligth the led depends on the inference result. To include the C model in the embedding code, we need to change the [model.cpp](C\tensorflow\lite\micro\examples\micro_speech\micro_features\model.cpp) file 
 
 > **[Disclaimer]**
 > The C folder scripts was not created by me. I just reuse previously implemented C blocks by adding the created to model to the script
