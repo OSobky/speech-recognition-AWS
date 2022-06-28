@@ -86,13 +86,10 @@ In this section we will discuss the milestones/phases needed for this project.
     1. We will be using Speech Command dataset provided by Google
     2. The dataset will be stored in Amazon S3 Bucket.
 2. [Data pre-processing using AWS SageMaker Processing Jobs](#2-data-preprocessing-using-aws-sagemaker-processing-jobs)
-3. ML Training using AWS SageMaker Training Jobs
-4. ML Deployment Web using AWS SageMaker End-Points
-5. ML Deployment PSoC6 board
-    1. Data in: Getting data from the PSoC6 microphone and sending it to pre-processing
-    2. Pre-processing: Feature engineering
-    3. ML Inference: Using the deployed model on the board
-    4. Post-processing: Converting inference output to UART/LED
+3. [Model Training in AWS](#3-model-training-in-aws)
+4. [ML Deployment Web using AWS SageMaker End-Points](#4-ml-deployment-web-using-aws-sagemaker-end-points)
+5. [ML Deployment PSoC6 board](#5-ml-deployment-psoc6-board)
+    
     
 <br>
 
@@ -107,7 +104,7 @@ Before disucssing the details of each milestone, let's discuss the prerequisites
 The following list is essintial for this project:
 - AWS Account
 - PSoC6 6 board
-- Modus Tool Box (MTB)
+- [ModusToolBox (MTB)](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/)
 
 
 In the following sections, we will disscuss how each milestone done and the challanges faced in each one.
@@ -205,7 +202,7 @@ We use processing jobs for preprocessing in this project. You can see how to cre
 <br>
 
 
-## Model Training in AWS
+## 3. Model Training in AWS
 <br>
 
 In this section, we will dissucs the model architcture and how to use Training Jobs for preprocessing in AWS SageMaker.
@@ -291,7 +288,7 @@ For training and testing tracking we used Tensorboard with SageMaker Studio. Ple
 
 <br>
 
-## ML Deployment Web using AWS SageMaker End-Points
+## 4. ML Deployment Web using AWS SageMaker End-Points
 
 As you can see in the the training and deployment figure above, the trained model now is in the S3 bucket (Model Artifact) and now we can use SageMaker to deploy the model. In this section we will discuss AWS SageMaker endpoints and the which one did we use. the following are the list of whole deployment methods provided by SageMaker:
 - #### SageMaker real-time hosting services ####
@@ -305,9 +302,21 @@ We used the real-time hosting for inference. SageMaker SDK make it very easy to 
 
 <br>
 
-## ML Deployment PSoC6 board 
+## 5. ML Deployment PSoC6 board 
 
-In this section, we will discuss how to deploy the created model to PSoC6 board. Deploying the model to the PSoc6 boards needs multiple steps, which are:
+In this section, we will discuss how to deploy the created model to PSoC6 board. First let's have an overview of our goal. As stated before, we want to have a board that recognize `Yes` & `No` word. Moreover, the following list & diagram shows the workflow of the PSoC6 board when it hear a new word.
+
+1. Data in: Getting data from the PSoC6 microphone and sending it to pre-processing
+2. Pre-processing: Feature engineering
+3. ML Inference: Using the deployed model on the board
+4. Post-processing: Converting inference output to UART/LED
+
+<div align="center">
+<img src="docs/images/Micro-speech example.png" title="Login Page" width="70%"> 
+</div>
+
+
+Now, let's discuss how to deploy a model to the board. Deploying the model to the PSoc6 boards needs multiple steps, which are:
 
 1. Create a TF Lite model from the Model artifact
     1. with Quantization
@@ -317,9 +326,7 @@ In this section, we will discuss how to deploy the created model to PSoC6 board.
 4. Deploy to PSoC6 using MTB
 
 
-<div align="center">
-<img src="docs/images/Micro-speech example.png" title="Login Page" width="70%"> 
-</div>
+
 
 The preceeding diagram shows the whole pipeline done by the micro controller.
 
@@ -346,7 +353,7 @@ Now we have all the required part, the C model, the preprocessing and postproces
 
 
 
-## Results
+# Results
 
 The following video show the results of testing the deployed model on the PSoC6 board. Play the video with the sound on!
 
