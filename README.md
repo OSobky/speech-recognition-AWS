@@ -283,9 +283,9 @@ We use the script mode with TensorFlow in this project. You can see how to creat
 
 ### Model Evaluation and Testing
 
-For training and testing tracking we used Tensorboard with SageMaker Studio. Please refer to the figures below for the training and test metrics. As the main goal of this project is not the model accuracy, we will not dive deep into the model evaluations
+For training and testing tracking we used Tensorboard with SageMaker Studio. Please refer to the figures below for the training and test metrics. As the main goal of this project is not the model accuracy, we will not dive deep into the model evaluations.
 
-#### Training and Testing accuracy 
+#### Training/Testing accuracy  and Confusion Matrix
 
 <!-- <div>
 <figure align="left">
@@ -318,18 +318,14 @@ Training accuracy       |  Testing accuracy
 
 ## ML Deployment Web using AWS SageMaker End-Points
 
-After training the model, we used SageMaker to deploy the model. which created an endpoint where you can use to refer from it.
+As you can see in the the training and deployment figure above, the trained model now is in the S3 bucket (Model Artifact) and now we can use SageMaker to deploy the model. In this section we will discuss AWS SageMaker endpoints and the which one did we use. the following are the list of whole deployment methods provided by SageMaker:
+- #### SageMaker real-time hosting services ####
+- Serverless Inference
+- SageMaker Asynchronous Inference
+- SageMaker batch transform
 
 
-In this section we will discuss AWS SageMaker endpoints and the which one did we use. the following are the list of whole deployment methods provided by SageMaker:
-
-- Deploy the model using Amazon SageMaker 
-    - #### SageMaker real-time hosting services ####
-    - Serverless Inference
-    - SageMaker Asynchronous Inference
-    - SageMaker batch transform
-
-We used the real-time hosting for inference. SageMaker SDK make it very easy to deploy the model. To deploy the model you only need to run the following command  `model.deploy()`
+We used the real-time hosting for inference. SageMaker SDK make it very easy to deploy the model. To deploy the model you only need to run the following command  `model.deploy()`. Please check [deploy-model.ipynb](deploy-model.ipynb) file to check how to create/delete an endpoint and how to inference from it.
 
 
 <br>
