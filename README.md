@@ -359,7 +359,10 @@ Now we have all the required part, the C model, the preprocessing and postproces
 
 
 ## Results
-TODO ADD VIDEO
+
+
+https://user-images.githubusercontent.com/36420198/176245891-519fdb49-fb55-4bc3-85fe-449075b0e5cd.mp4
+
 
 ## Challanges 
 
