@@ -38,7 +38,6 @@
 
 ## Motivation
 
-<table><tr><td>
 
 Machine Learning has found numerous real-world applications, but bringing the power of
 Machine Learning to resource constrained and small footprint is still challenging. There are
@@ -53,20 +52,9 @@ capabilities of the device.
 <div align="center">
 <img src="docs/images/psoc6.webp" title="Login Page" width="50%"> 
 </div>
-<details>
-<summary>Screenshots</summary>
-<br>
 
-> **[?]**
-> Please provide your screenshots here.
 
-|                               Home Page                               |                               Login Page                               |
-| :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| <img src="docs/images/screenshot.png" title="Home Page" width="50%"> | <img src="docs/images/screenshot.png" title="Login Page" width="50%"> |
 
-</details>
-
-</td></tr></table>
 
 
 
@@ -360,9 +348,11 @@ Now we have all the required part, the C model, the preprocessing and postproces
 
 ## Results
 
+The following video show the results of testing the deployed model on the PSoC6 board. Play the video with the sound on!
 
 https://user-images.githubusercontent.com/36420198/176245891-519fdb49-fb55-4bc3-85fe-449075b0e5cd.mp4
 
+As you can see, the board already recognize the two words `Yes` & `No`. When it hear `Yes` it have bright red light, when it hears `No` it have a dim red light, and when it hear a different word than `Yes` and `No` it turns off the light
 
 ## Challanges 
 
