@@ -97,7 +97,7 @@ In this section we will discuss the milestones/phases needed for this project.
 1. [Data Acquisition & storage in AWS](#1-data-acquisition--storage-in-aws)
     1. We will be using Speech Command dataset provided by Google
     2. The dataset will be stored in Amazon S3 Bucket.
-2. Data pre-processing using AWS SageMaker Processing Jobs
+2. [Data pre-processing using AWS SageMaker Processing Jobs](#2-data-preprocessing-using-aws-sagemaker-processing-jobs)
 3. ML Training using AWS SageMaker Training Jobs
 4. ML Deployment Web using AWS SageMaker End-Points
 5. ML Deployment PSoC6 board (Figure below)
@@ -153,7 +153,7 @@ In this project, we uses the first way in the previous list to upload data to S3
 
 <br>
 
-## Data preprocessing using AWS SageMaker Processing Jobs
+## 2. Data preprocessing using AWS SageMaker Processing Jobs
 
 In this section, we dissucs the preprocessing techniques and how to use Processing Jobs for preprocessing in SageMaker. However, Beforehand we will dissucss what is SageMaker.
 
@@ -285,33 +285,22 @@ We use the script mode with TensorFlow in this project. You can see how to creat
 
 For training and testing tracking we used Tensorboard with SageMaker Studio. Please refer to the figures below for the training and test metrics. As the main goal of this project is not the model accuracy, we will not dive deep into the model evaluations.
 
-#### Training/Testing accuracy  and Confusion Matrix
 
-<!-- <div>
-<figure align="left">
-<img src="docs/images/training-accuracy.png" title="Training Accuracy" width="50%">
-<img src="docs/images/training-accuracy.png" title="Training Accuracy" width="50%">
-<figcaption align = "center"><b>Training Accuracy</b></figcaption>
-</figure>
-
-<figure align="right">
-<img src="docs/images/training-accuracy.png" title="Training Accuracy" width="50%">
-<figcaption align = "center"><b>Training Accuracy</b></figcaption>
-</figure>
-
-</div>
-<br> -->
-
-Training accuracy       |  Testing accuracy  
-:-------------------------:|:-------------------------:
-![](docs/images/training-accuracy.png)  |  ![](docs/images/Test-accuracy.png)
-
+<details>
+<summary>Training/Testing accuracy  and Confusion Matrix</summary>
 <br>
 
-<figure align="center">
-<img src="docs/images/cm.png" title="Confusion Matrix" width="70%">
-<figcaption align = "center"><b>Confusion Matrix </b></figcaption>
-</figure>
+> **[?]**
+> Please provide your screenshots here.
+
+|                               Training accuracy                       |                         Testing accuracy                               |
+| :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| <img src="docs/images/training-accuracy.png" title="Home Page" width="70%"> | <img src="docs/images/Test-accuracy.png" title="Login Page" width="70%"> |
+|                               Confusion Matrix                       |
+| <img src="docs/images/cm.png" title="Confusion Matrix" width="50%"> |
+</details>
+
+
 
 
 <br>
