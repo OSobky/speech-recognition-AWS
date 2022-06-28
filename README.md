@@ -100,7 +100,7 @@ In this section we will discuss the milestones/phases needed for this project.
 2. [Data pre-processing using AWS SageMaker Processing Jobs](#2-data-preprocessing-using-aws-sagemaker-processing-jobs)
 3. ML Training using AWS SageMaker Training Jobs
 4. ML Deployment Web using AWS SageMaker End-Points
-5. ML Deployment PSoC6 board (Figure below)
+5. ML Deployment PSoC6 board
     1. Data in: Getting data from the PSoC6 microphone and sending it to pre-processing
     2. Pre-processing: Feature engineering
     3. ML Inference: Using the deployed model on the board
@@ -108,9 +108,7 @@ In this section we will discuss the milestones/phases needed for this project.
     
 <br>
 
-<div align="center">
-<img src="docs/images/Micro-speech example.png" title="Login Page" width="70%"> 
-</div>
+
 
 <br>
 
@@ -297,7 +295,7 @@ For training and testing tracking we used Tensorboard with SageMaker Studio. Ple
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
 | <img src="docs/images/training-accuracy.png" title="Home Page" width="100%"> | <img src="docs/images/Test-accuracy.png" title="Login Page" width="100%"> |
 |                               Confusion Matrix                       |
-| <img src="docs/images/cm.png" title="Confusion Matrix" width="50%"> |
+| <img src="docs/images/cm.png" title="Confusion Matrix" width="100%"> |
 </details>
 
 
@@ -321,34 +319,65 @@ We used the real-time hosting for inference. SageMaker SDK make it very easy to 
 
 ## ML Deployment PSoC6 board 
 
+In this section, we will discuss how to deploy the created model to PSoC6 board. Deploying the model to the PSoc6 boards needs multiple steps, which are:
 
-## Usage
+1. Create a TF Lite model from the Model artifact
+    1. with Quantization
+    2. Without Quantization
+2. Generate a C Model 
+3. Use pre-processing and post-processing C blocks
+4. Deploy to PSoC6 using MTB
 
-> **[?]**
-> How does one go about using it?
-> Provide various use cases and code examples here.
+
+<div align="center">
+<img src="docs/images/Micro-speech example.png" title="Login Page" width="70%"> 
+</div>
+
+The preceeding diagram shows the whole pipeline done by the micro controller.
+
+Before diving deep into how to deploy the model, we need to clarify the following. The main goal of this project is to showcase AWS and deploy the model to PSoC 6 board. Therefore, in step 4 we are using pre-processing and post-processing C blocks which were already implemented by Google example. However, we took a different approach for preprocessing (built-in processing function `tf.signal.stft`). As a result, the created model could not work with the C blocks which already been implemented. As a solution, we resued python script created by one of my colleagues which create the same model however with the same approach in the C blocks. The reused python scripts are in the [utils/keras_rewrite](utils/keras_rewrite) folder.
+
+### Create TF Lite model 
+
+Now lets disscuss the steps in more details. First step is to use the [TF Lite](https://www.tensorflow.org/lite) library to convert a TF model to TF Lite model. There are two ways to convert a model to TF Lite model, with [Quantization](https://en.wikipedia.org/wiki/Quantization) and without Qunatization. For deploying the model to a board it is better to work with Quantized TF Lite model since it smaller compared to the other way.
+
+
+### Generate a C Model 
+
+The second step to deploy the model is to convert the TF lite model to a C Model using xxd tool or use python script to convert it
+
+### Use pre-processing and post-processing C blocks
+
+You will find in the [C](C) folder the C blocks required for the deployment. which uses the C model and do a inference then ligth the led depends on the inference result. To include the C model in the embedding code, we need to change the TODO file 
+
+> **[Disclaimer]**
+> The C folder scripts was not created by me. I just reuse previously implemented C blocks by adding the created to model to the script
+
+### Deploy to PSoC6 using MTB
+Now we have all the required part, the C model, the preprocessing and postprocessing C blocks, we deployed the model to the PSoC6 board using [MTB](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/)
+
+
+
+## Results
+TODO ADD VIDEO
+
+## Challanges 
+
+## Next Steps 
+
+
+
 
 
 ## Project assistance
 
-If you want to say **thank you** or/and support active development of Speech Recognition AWS end-to-end solution on PSoC6:
+I would like to thank XXXX & XXXX as my supervisers and support me through the project
 
-- Add a [GitHub Star](https://github.com/OSobky/speech-recognition-AWS-readme) to the project.
-- Tweet about the Speech Recognition AWS end-to-end solution on PSoC6.
-- Write interesting articles about the project on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your personal blog.
-
-Together, we can make Speech Recognition AWS end-to-end solution on PSoC6 **better**!
+Also I would like to thank @atakeskinn for letting me reuse his work.
 
 
 ## Authors & contributors
 
 The original setup of this repository is by [Omar Elsobky](https://github.com/OSobky).
 
-For a full list of all authors and contributors, see [the contributors page](https://github.com/OSobky/speech-recognition-AWS-readme/contributors).
 
-
-## Acknowledgements
-
-> **[?]**
-> If your work was funded by any organization or institution, acknowledge their support here.
-> In addition, if your work relies on other software libraries, or was inspired by looking at other work, it is appropriate to acknowledge this intellectual debt too.
