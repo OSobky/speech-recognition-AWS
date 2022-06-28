@@ -295,7 +295,7 @@ For training and testing tracking we used Tensorboard with SageMaker Studio. Ple
 
 |                               Training accuracy                       |                         Testing accuracy                               |
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| <img src="docs/images/training-accuracy.png" title="Home Page" width="70%"> | <img src="docs/images/Test-accuracy.png" title="Login Page" width="70%"> |
+| <img src="docs/images/training-accuracy.png" title="Home Page" width="100%"> | <img src="docs/images/Test-accuracy.png" title="Login Page" width="100%"> |
 |                               Confusion Matrix                       |
 | <img src="docs/images/cm.png" title="Confusion Matrix" width="50%"> |
 </details>
