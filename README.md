@@ -1,6 +1,5 @@
 <h1 align="center">
   <a href="https://github.com/OSobky/speech-recognition-AWS">
-    <!-- Please provide path to your logo here -->
     <img src="docs/images/sm_background.png" alt="Logo" width="80" height="80">
     <img src="docs/images/psoc6.png" alt="Logo" width="90" height="90">
   </a>
@@ -277,8 +276,6 @@ For training and testing tracking we used Tensorboard with SageMaker Studio. Ple
 <summary>Training/Testing accuracy  and Confusion Matrix</summary>
 <br>
 
-> **[?]**
-> Please provide your screenshots here.
 
 |                               Training accuracy                       |                         Testing accuracy                               |
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
@@ -367,20 +364,31 @@ As you can see, the board already recognize the two words `Yes` & `No`. When it 
 
 ## Challanges 
 
-## Next Steps 
+TODO
+
+## Summary
+
+In conclusion, we were able to showcase AWS which shows how easy is the ML development on AWS. Also, we were able to deploy the model on PSoC6 board. the project was done in five different milesotne which is the following:
+
+1. [Data Acquisition & storage in AWS](#1-data-acquisition--storage-in-aws)
+2. [Data pre-processing using AWS SageMaker Processing Jobs](#2-data-preprocessing-using-aws-sagemaker-processing-jobs)
+3. [Model Training in AWS](#3-model-training-in-aws)
+4. [ML Deployment Web using AWS SageMaker End-Points](#4-ml-deployment-web-using-aws-sagemaker-end-points)
+5. [ML Deployment PSoC6 board](#5-ml-deployment-psoc6-board)
 
 
 
 
 
-## Project assistance
+
+# Project assistance
 
 I would like to thank XXXX & XXXX as my supervisers and support me through the project
 
 Also I would like to thank [@atakeskinn](https://github.com/atakeskinn) for letting me reuse his work.
 
 
-## Authors & contributors
+# Authors & contributors
 
 The original setup of this repository is by [Omar Elsobky](https://github.com/OSobky).
 
