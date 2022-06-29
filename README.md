@@ -156,7 +156,7 @@ One of the feature we will use for development is [SageMaker Studio](https://doc
 The following diagram illustrates an overview of the workflow within SageMaker.
 
 <div align="center">
-<img src="docs/images/SageMaker-diagram.png" title="Login Page" width="70%"> 
+<img src="docs/images/SageMaker-diagram.png" title="SageMaker-diagram" width="80%"> 
 </div>
 
 First we have the data inside of the S3 bucket, then we use SageMaker Studio for development. Moreover, we create a Processing Job to do the preprocessing as disscused before. Now, we have the processed data stored in the S3 bucket, we start training the model using Training Jobs which will save the created model as an artifact in the S3 bucket. In the next sections, we will dive deep into each step.
@@ -219,7 +219,7 @@ This is a simple model comprising of a Convolutional 2D layer, a Fully Connected
 
 
 <div align="center">
-<img src="docs/images/model_2.tflite.png" title="Login Page" width="30%"> 
+<img src="docs/images/model_2.tflite.png" title="Login Page" width="20%"> 
 </div>
 
 This image was derived from visualizing the 'model_2.tflite' file in Netron
