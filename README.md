@@ -81,8 +81,6 @@ In this section we will discuss the milestones/phases needed for this project.
 #### The different phases for the end-to-end example are described below: ####
 
 1. [Data Acquisition & storage in AWS](#1-data-acquisition--storage-in-aws)
-    1. We will be using Speech Command dataset provided by Google
-    2. The dataset will be stored in Amazon S3 Bucket.
 2. [Data pre-processing using AWS SageMaker Processing Jobs](#2-data-preprocessing-using-aws-sagemaker-processing-jobs)
 3. [Model Training in AWS](#3-model-training-in-aws)
 4. [ML Deployment Web using AWS SageMaker End-Points](#4-ml-deployment-web-using-aws-sagemaker-end-points)
@@ -140,21 +138,29 @@ In this section, we dissucs the preprocessing techniques and how to use Processi
 
 ### SageMaker
 
-- Fully managed ML service, consisting of multiple services. Used for:
+Amazon SageMaker is a fully managed machine learning service. With SageMaker, data scientists and developers can quickly and easily build and train machine learning models, and then directly deploy them into a production-ready hosted environment. It provides an integrated Jupyter authoring notebook instance for easy access to your data sources for exploration and analysis, so you don't have to manage servers.
+
+- AWS SageMaker consisting of multiple features. which can be used for:
     - Label
     - Build/Develop
     - Train
-    - Deploy 
+    - Deploy
+    - ...
 
-- Studio = Managed EC2 Instance (Virtual Machine) + Managed EBS Volume (Storage)
+For more indepth disucssion on AWS SageMaker feature please click [here](https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html#whatis-features).
 
 - We will be using also Processing Jobs, Training Jobs, Endpoints provided by SageMaker
 
-we will use SageMaker Studio for the development. The following diagram illustrates the workflow within SageMaker
+One of the feature we will use for development is [SageMaker Studio](https://docs.aws.amazon.com/sagemaker/latest/dg/studio.html). Which is An integrated machine learning environment where you can build, train, deploy, and analyze your models all in the same application.
+
+
+The following diagram illustrates an overview of the workflow within SageMaker.
 
 <div align="center">
 <img src="docs/images/SageMaker-diagram.png" title="Login Page" width="70%"> 
 </div>
+
+First we have the data inside of the S3 bucket, then we use SageMaker Studio for development. Moreover, we create a Processing Job to do the preprocessing as disscused before. Now, we have the processed data stored in the S3 bucket, we start training the model using Training Jobs which will save the created model as an artifact in the S3 bucket. In the next sections, we will dive deep into each step.
 
 
 ### Spectrograms
@@ -295,7 +301,7 @@ As you can see in the the training and deployment figure above, the trained mode
 - SageMaker batch transform
 
 
-We used the real-time hosting for inference. SageMaker SDK make it very easy to deploy the model. To deploy the model you only need to run the following command  `model.deploy()`. Please check [deploy-model.ipynb](deploy-model.ipynb) file to check how to create/delete an endpoint and how to inference from it.
+We used the real-time hosting for inference. SageMaker SDK make it very easy to deploy the model. To deploy the model you only need to run the following command  `model.deploy()`. Please check [deploy-model.ipynb](depoly-model.ipynb) file to check how to create/delete an endpoint and how to inference from it.
 
 
 <br>
@@ -341,7 +347,7 @@ The second step to deploy the model is to convert the TF lite model to a C Model
 
 ### Use pre-processing and post-processing C blocks
 
-You will find in the [C](C) folder the C blocks required for the deployment. which uses the C model and do a inference then ligth the led depends on the inference result. To include the C model in the embedding code, we need to change the [model.cpp](C\tensorflow\lite\micro\examples\micro_speech\micro_features\model.cpp) file 
+You will find in the [C](C) folder the C blocks required for the deployment. which uses the C model and do a inference then ligth the led depends on the inference result. To include the C model in the embedding code, we need to change the [model.cpp](C/tensorflow/lite/micro/examples/micro_speech/micro_features.model.cpp) file 
 
 > **[Disclaimer]**
 > The C folder scripts was not created by me. I just reuse previously implemented C blocks by adding the created to model to the script
