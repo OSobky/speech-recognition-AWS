@@ -415,7 +415,7 @@ In conclusion, we were able to showcase AWS which shows how easy is the ML devel
 
 # Project assistance
 
-I would like to thank XXXX & XXXX as my supervisers and support me through the project
+I would like to thank Fizan Aslam & Philipp Van Kempen as my supervisors and supporting me through the whole project
 
 Also I would like to thank [@atakeskinn](https://github.com/atakeskinn) for letting me reuse his work.
 
