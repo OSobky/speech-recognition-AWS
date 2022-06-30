@@ -8,8 +8,6 @@
 <div align="center">
   Speech Recognition AWS end-to-end solution on PSoC6
   <br />
-  <a href="#about"><strong>Explore the screenshots »</strong></a>
-  <br />
   <br />
 </div>
 
@@ -110,7 +108,7 @@ First we will speak about the datasets used and then how to move the data to AWS
 
 ### Speech Commands Dataset
 
-For this project, we uses the Speech Commands dataset, a dataset created by Google which contains around 65,000 one-second long audios of 30 short words (Yes, No, and etc.) said by thousands different people. However, for development we uses Mini-Speech Commands Dataset (~1k) to develop the whole pipeline then re-run it with the original dataset.
+For this project, we uses the [Speech Commands dataset](https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html), a dataset created by Google which contains around 65,000 one-second long audios of 30 short words (Yes, No, and etc.) said by thousands different people. However, for development we uses Mini-Speech Commands Dataset (~1k) to develop the whole pipeline then re-run it with the original dataset.
 
 ### Amazon Simple Storage Service (Amazon S3)
 
