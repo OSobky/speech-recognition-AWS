@@ -39,8 +39,7 @@
 Machine Learning has found numerous real-world applications, but bringing the power of
 Machine Learning to resource constrained and small footprint is still challenging. There are
 many limiting factors to the deployment of ML models on microcontrollers such as libraries
-used by the model, programming the microcontroller, data types, and etc. This IDP will be
-completed in cooperation with XXXXXXX, we will use Infineon PSoC6 board, shown
+used by the model, programming the microcontroller, data types, and etc. We will use Infineon PSoC6 board, shown
 in Figure below, to recognise Keywords "yes" & "no" using a Machine Learning Model created on
 AWS. The application listens to its surroundings with a microphone and indicates when it has
 detected a word by lighting an LED or displaying data on a screen, depending on the
@@ -49,7 +48,6 @@ capabilities of the device.
 <div align="center">
 <img src="docs/images/psoc6.webp" title="Login Page" width="50%"> 
 </div>
-
 
 
 
@@ -364,7 +362,41 @@ As you can see, the board already recognize the two words `Yes` & `No`. When it 
 
 ## Challanges 
 
-TODO
+During this project, we faced multiple challanges. In this section we will disscuss the faced challlanges and how did we solve it.
+
+### Model is too big 
+
+First, we had a different model architecture than the one presenated. However, the problem was the converted TF lite model was too big to be deployed on the PSoC6 board. The non-quantized model wass 6.6 MB and the quantized one was 1.5 MB.  The first approach to try to solve this challange was cahnge the output dimension of the preporcessing block as it had (124, 129, 1) output features and changed it to  (49,40,1). However this is not decrease the model size alot. The second apporach was to change the model architecture as the first one had around 16 million parameters and the new one had 3 K paramaters. You can below the two architucures and differences.
+
+<details>
+<summary>Model architectures</summary>
+<br>
+
+
+|                               Old                       |                         New                              |
+| :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| <img src="docs/images/old model arch.png" title="Home Page" width="100%"> | <img src="docs/images/new model arch.png" title="Login Page" width="100%"> |
+
+</details>
+
+### Model Deployment on PSoC6
+
+During the model deploymnet on PSoC6 using MTB, we faced an error however it did not say what was the error exactly, as the figure below shows.
+
+<details>
+<summary>Error</summary>
+<img src="docs/images/mtb-error.png" title="Login Page" width="50%"> 
+
+</details>
+
+We had to check everything was working well to find the error. Moreover, the error that the pre-processing and post-processing blocks were producing different output feature size than the trained model. We had to change the model architecture slighty as you can see below to adapt to the C blocks
+
+<details>
+<summary> Model architecture change</summary>
+<img src="docs/images/model change.png" title="Login Page" width="100%"> 
+
+</details>
+
 
 ## Summary
 
